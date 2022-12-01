@@ -1,0 +1,33 @@
+{
+  "name": "tabarin-pwa-ynov",
+  "version": "1.0.0",
+  "description": "Small PWA",
+  "main": "app.js",
+  "repository": "git@github.com:kravorkid/tabarin-pwa-ynov.git",
+  "author": "matthieu <matthieu.tabarin@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config app.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "@koa/router": "^12.0.0",
+    "dotenv": "^16.0.3",
+    "joi": "^17.7.0",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-respond": "^2.1.0",
+    "koa-static": "^5.0.0",
+    "mongoose": "^6.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "imports": {
+    "#config/*.js": "./src/config/*.js",
+    "#routes/*.js": "./src/routes/*.js",
+    "#services/*.js": "./src/services/*.js",
+    "#components/*.js": "./src/components/*.js"
+  }
+}
