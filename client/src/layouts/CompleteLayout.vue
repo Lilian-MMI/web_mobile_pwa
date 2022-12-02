@@ -23,6 +23,7 @@
           icon="subject"
           class="text-grey-8"
           :active-class="`text-primary`"
+          @click="iShowingSidebar = true"
         />
         <q-btn
           flat
@@ -91,10 +92,64 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+
+    <q-drawer
+      side="left"
+      v-model="iShowingSidebar"
+      show-if-above
+      bordered
+      :width="300"
+      :breakpoint="500"
+    >
+      <q-scroll-area class="fit">
+        <div class="q-pa-sm">
+          <q-item-section class="flex justify-end">
+            <q-icon
+              class="q-ml-auto"
+              name="close"
+              size="1.5em"
+              color="grey"
+              @click="iShowingSidebar = false"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label
+              class="text-weight-bold q-mt-md"
+              style="font-size: 1.3rem"
+            >
+              Mes listes
+            </q-item-label>
+            <q-btn
+              label="Créer une liste"
+              color="accent"
+              no-caps
+              class="q-my-md"
+              @click="isShowingDialogCreateList = true"
+              :active-class="`text-primary`"
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-item
+              class="q-pa-none text-weight-medium"
+              v-for="(todo, i) in todos"
+              :key="todo._id"
+              clickable
+              @click="$router.push(`/todos/${todo._id}`)"
+            >
+              <q-item-section>
+                <q-item-label>{{ todo.title }}</q-item-label>
+                <q-separator v-if="i < todos.length - 1" class="q-mt-md" />
+              </q-item-section>
+            </q-item>
+          </q-item-section>
+        </div>
+      </q-scroll-area>
+    </q-drawer>
   </q-layout>
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { useTodosStore } from 'src/stores/todos';
 import { ref } from 'vue';
 
@@ -102,9 +157,12 @@ const isShowingDialogCreateList = ref(false);
 const listName = ref('');
 
 const todosStore = useTodosStore();
+const { todos } = storeToRefs(todosStore);
 
 const handleAddList = () => {
   todosStore.addTodo({ title: listName.value });
   isShowingDialogCreateList.value = false;
 };
+
+const iShowingSidebar = ref(false);
 </script>
