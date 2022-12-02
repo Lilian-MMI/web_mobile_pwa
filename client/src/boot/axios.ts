@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance } from 'axios';
+import { Notify } from 'quasar';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -14,6 +15,30 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({ baseURL: 'http://127.0.0.1:5000/api/v1' });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      Notify.create({
+        message: 'Vous devez être connecté pour accéder à cette page',
+        color: 'negative',
+        position: 'top',
+      });
+    }
+
+    // const message = error.response.data.message;
+    const message = 'Une erreur est survenue';
+
+    Notify.create({
+      message,
+      color: 'negative',
+      position: 'top',
+    });
+
+    return Promise.reject(error);
+  }
+);
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

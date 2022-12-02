@@ -137,8 +137,8 @@
               @click="$router.push(`/todos/${todo._id}`)"
             >
               <q-item-section>
-                <q-item-label>{{ todo.title }}</q-item-label>
-                <q-separator v-if="i < todos.length - 1" class="q-mt-md" />
+                <q-item-label class="q-mb-md">{{ todo.title }}</q-item-label>
+                <q-separator v-if="i < todos.length - 1" />
               </q-item-section>
             </q-item>
           </q-item-section>
