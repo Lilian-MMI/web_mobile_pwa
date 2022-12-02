@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-white text-black">
-      <q-toolbar class="q-pa-sm">
+      <q-toolbar class="q-pa-md">
         <q-toolbar-title class="text-weight-medium">
           Dashboard
         </q-toolbar-title>
