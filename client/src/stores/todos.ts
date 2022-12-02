@@ -69,29 +69,17 @@ export const useTodosStore = defineStore({
       });
     },
 
-    async deleteTask(id: string, todoId: string) {
+    async deleteTask(id: string) {
       await deleteTask(id);
       this.todos = this.todos.map((todo) => {
-        if (todo._id === todoId) {
-          todo.tasks = todo.tasks?.filter((task) => task._id !== id);
-        }
+        todo.tasks = todo.tasks?.filter((task) => task._id !== id);
         return todo;
       });
     },
 
     async updateTask(id: string, taskUpdate: TaskUpdate) {
-      const taskReturn = await updateTask(id, taskUpdate);
-      this.todos = this.todos.map((todo) => {
-        if (todo._id === taskReturn.list) {
-          todo.tasks = todo.tasks?.map((task) => {
-            if (task._id === id) {
-              return { ...task, ...taskReturn };
-            }
-            return task;
-          });
-        }
-        return todo;
-      });
+      await updateTask(id, taskUpdate);
+      await this.fetchTodos();
     },
   },
 });

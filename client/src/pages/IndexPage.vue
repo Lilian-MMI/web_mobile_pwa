@@ -129,7 +129,7 @@
         >
 
         <p class="text-center q-ma-md">
-          Vous êtes sur le point de supprimer votre tâche êtes vous sûr de
+          Vous êtes sur le point de supprimer votre liste êtes vous sûr de
           vouloir faire ça ?
         </p>
 

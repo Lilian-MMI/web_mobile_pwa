@@ -1,7 +1,6 @@
 <template>
   <q-header class="bg-white text-black">
     <q-toolbar class="q-pa-sm">
-      <!-- go back -->
       <q-btn
         icon="chevron_left"
         color="grey-3"
@@ -10,30 +9,37 @@
         class="text-black"
       />
 
-      <!-- title -->
       <q-toolbar-title class="text-weight-medium" v-if="props.title">
         {{ props.title }}
       </q-toolbar-title>
 
-      <!-- cancel -->
       <q-btn
         v-if="props.button"
         flat
         round
-        :icon="!props.button ? '' : 'more_horiz'"
-        :label="!props.button ? 'Annuler' : ''"
+        :icon="props.button === 'cancel' ? '' : 'more_horiz'"
+        :label="props.button === 'cancel' ? 'Annuler' : ''"
         no-caps
         color="grey-8"
-        to="/"
         class="text-black q-ml-auto"
+        @click="
+          !props.buttonAction
+            ? $router.go(-1)
+            : dialogsStore.handleDialogOptionsOpen(props.buttonAction)
+        "
       />
     </q-toolbar>
   </q-header>
 </template>
 
 <script setup lang="ts">
+import { useDialogStore } from 'src/stores/dialog';
+
 const props = defineProps<{
   title?: string;
   button?: 'cancel' | 'edit';
+  buttonAction?: 'task' | 'list';
 }>();
+
+const dialogsStore = useDialogStore();
 </script>

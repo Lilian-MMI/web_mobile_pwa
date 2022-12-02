@@ -16,6 +16,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/TodoPage.vue'),
         meta: {
           buttonType: 'edit',
+          buttonAction: 'list',
         },
       },
       {
@@ -23,6 +24,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('src/pages/TaskPage.vue'),
         meta: {
           buttonType: 'edit',
+          buttonAction: 'task',
         },
       },
       {
